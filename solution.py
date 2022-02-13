@@ -18,11 +18,12 @@ def webServer(port=13331):
         # print('Ready to serve...')
         connectionSocket, addr = serverSocket.accept()
         #print(f"Connection from {addr} has been established!")
-        #connectionSocket.send('HTTP/1.1 200 OK\r\n'.encode())
+        connectionSocket.send('HTTP/1.1 200 OK\r\n'.encode())
         # Fill in start      #Fill in end
         try:
 
             try:
+                connectionSocket, addr = serverSocket.accept()
                 message = serverSocket.recv(1024)
                 #print(message.decode("utf-8"))
                 # Fill in start    #Fill in end
