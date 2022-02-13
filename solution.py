@@ -23,7 +23,7 @@ def webServer(port=13331):
         try:
 
             try:
-                connectionSocket, addr = serverSocket.accept()
+                serverSocket, addr = connectionSocket.accept()
                 message = serverSocket.recv(1024)
                 #print(message.decode("utf-8"))
                 # Fill in start    #Fill in end
