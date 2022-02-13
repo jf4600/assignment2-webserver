@@ -18,12 +18,12 @@ def webServer(port=13331):
         # print('Ready to serve...')
         connectionSocket, addr = serverSocket.accept()
         #print(f"Connection from {addr} has been established!")
-        connectionSocket.send('HTTP/1.1 200 OK\r\n'.encode())
+        connectionSocket.send('HTTP/1.1 200 OK\r\n\r\n'.encode())
         # Fill in start      #Fill in end
         try:
 
             try:
-                message = serverSocket.recv(1024).decode()
+                message = serverSocket.recv(1024)
                 #print(message.decode("utf-8"))
                 # Fill in start    #Fill in end
                 filename = message.split()[1]
@@ -32,7 +32,7 @@ def webServer(port=13331):
                 # Fill in start     #Fill in end
 
                 # Send one HTTP header line into socket.
-                connectionSocket.send("HTTP/1.1 200\r\n".encode)
+                connectionSocket.send("HTTP/1.1 200\r\n\r\n".encode)
                 # Fill in start
 
                 # Fill in end
