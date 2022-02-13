@@ -32,7 +32,7 @@ def webServer(port=13331):
                 # Fill in start     #Fill in end
 
                 # Send one HTTP header line into socket.
-                connectionSocket.send('HTTP/1.1 200 OK\r\n\r\n')
+                connectionSocket.send('HTTP/1.1 200 OK\r\n\r\n'.encode())
                 # Fill in start
 
                 # Fill in end
