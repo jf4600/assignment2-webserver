@@ -23,7 +23,7 @@ def webServer(port=13331):
     try:
 
       try:
-        message = serverSocket.recv(1024)
+        message = serverSocket.recv(1024).decode
         print(message.decode("utf-8"))
         #Fill in start    #Fill in end
         filename = message.split()[1]
