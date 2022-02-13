@@ -5,63 +5,64 @@ import sys
 
 
 def webServer(port=13331):
-  serverSocket = socket(AF_INET, SOCK_STREAM)
-  #Prepare a server socket
-  serverSocket.bind(("", port))
-  #Fill in start
-  serverSocket.listen(1)
+    serverSocket = socket(AF_INET, SOCK_STREAM)
+    # Prepare a server socket
+    serverSocket.bind(("", port))
+    # Fill in start
+    serverSocket.listen(1)
 
-  #Fill in end
+    # Fill in end
 
-  while True:
-    #Establish the connection
-    #print('Ready to serve...')
-    connectionSocket, addr = serverSocket.accept()
-    print(f"Connection from {addr} has been established!")
-    connectionSocket.send(bytes("Welcome to the server!", "utf-8"))
-    #Fill in start      #Fill in end
-    try:
+    while True:
+        # Establish the connection
+        # print('Ready to serve...')
+        connectionSocket, addr = serverSocket.accept()
+        #print(f"Connection from {addr} has been established!")
+        connectionSocket.send(bytes("Welcome to the server!", "utf-8"))
+        # Fill in start      #Fill in end
+        try:
 
-      try:
-        message = serverSocket.recv(1024).decode
-        print(message.decode("utf-8"))
-        #Fill in start    #Fill in end
-        filename = message.split()[1]
-        f = open(filename[1:])
-        outputdata = f.read()
-        #Fill in start     #Fill in end
-        
-        #Send one HTTP header line into socket.
-        connectionSocket.send("HTTP/1.1 200\r\n")
-        #Fill in start
+            try:
+                message = serverSocket.recv(1024).decode
+                #print(message.decode("utf-8"))
+                # Fill in start    #Fill in end
+                filename = message.split()[1]
+                f = open(filename[1:])
+                outputdata = f.read()
+                # Fill in start     #Fill in end
 
-        #Fill in end
+                # Send one HTTP header line into socket.
+                connectionSocket.send("HTTP/1.1 200\r\n")
+                # Fill in start
 
-        #Send the content of the requested file to the client
-        for i in range(0, len(outputdata)):
-          connectionSocket.send(outputdata[i].encode())
+                # Fill in end
 
-        connectionSocket.send("\r\n".encode())
-        connectionSocket.close()
-      except IOError:
-        # Send response message for file not found (404)
-        connectionSocket.send("HTTP/1.1 404 Not Found\r\n")
-        #Fill in start
-        connectionSocket.send("<html><head></head><body><h1>404 Not Found</h1></body></html>")
-        #Fill in end
+                # Send the content of the requested file to the client
+                for i in range(0, len(outputdata)):
+                    connectionSocket.send(outputdata[i].encode())
 
+                connectionSocket.send("\r\n".encode())
+                connectionSocket.close()
+            except IOError:
+                # Send response message for file not found (404)
+                connectionSocket.send("HTTP/1.1 404 Not Found\r\n")
+                # Fill in start
+                connectionSocket.send("<html><head></head><body><h1>404 Not Found</h1></body></html>")
+                # Fill in end
 
-        #Close client socket
-        connectionSocket.close()
-        #Fill in start
+                # Close client socket
+                connectionSocket.close()
+                # Fill in start
 
-        #Fill in end
+                # Fill in end
 
-    except (ConnectionResetError, BrokenPipeError):
-      pass
+        except (ConnectionResetError, BrokenPipeError):
+            pass
 
-  serverSocket.close()
-  sys.exit()  # Terminate the program after sending the corresponding data
+    serverSocket.close()
+    sys.exit()  # Terminate the program after sending the corresponding data
+
 
 if __name__ == "__main__":
-  webServer(13331)
+    webServer(13331)
+
