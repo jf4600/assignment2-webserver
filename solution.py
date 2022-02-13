@@ -1,4 +1,3 @@
-
 # import socket module
 from socket import *
 # In order to terminate the program
@@ -46,7 +45,7 @@ def webServer(port=13331):
                 connectionSocket.close()
             except IOError:
                 # Send response message for file not found (404)
-                connectionSocket.send("HTTP/1.1 404 Not Found")
+                connectionSocket.send(bytes("HTTP/1.1 404 Not Found", "utf-8"))
                     #send("HTTP/1.1 404 Not Found\r\n\r\n".encode)
                 # Fill in start
                 #connectionSocket.send("<html><head></head><body><h1>404 Not Found</h1></body></html>")
